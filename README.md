@@ -1,8 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Artwork Gallery
+
+This project is a Next.js-based web application focused on showcasing artwork, with features like user authentication, favorites, history, and detailed artwork views.
 
 ## Getting Started
 
-First, run the development server:
+To run the development server locally, follow these steps:
 
 ```bash
 npm run dev
@@ -12,27 +14,52 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to see the app in action.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Project Structure Overview
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- **`pages/`**: Contains the main pages of the app, such as:
+  - `index.js` for the homepage
+  - `login.js` and `register.js` for authentication
+  - `artwork/` directory with `[objectID].js` for individual artwork details and `index.js` for artwork search/list
+  - `favourites.js` and `history.js` for user-specific data
+- **`components/`**: Reusable React components like:
+  - `ArtworkCard.js` and `ArtworkCardDetail.js` for displaying artwork summaries and details
+  - `Layout.js` for page layout
+  - `MainNav.js` for navigation
+  - `RouteGuard.js` for protected routes
+- **`lib/`**: Utility functions such as:
+  - `authenticate.js` for auth logic
+  - `userData.js` for user data handling
+- **`store.js`**: State management setup (likely using a library like Redux or Zustand)
+- **`public/`**: Static assets including images and data files like `validObjectIDList.json`
+- **`styles/`**: CSS files for styling, including Bootstrap and custom styles
+- **`pages/api/`**: API routes, e.g., `hello.js`
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## How Messages Flow
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- When a user interacts with the app, components like `MainNav` or `ArtworkCard` trigger actions.
+- For artwork details, `pages/artwork/[objectID].js` loads specific artwork info.
+- Authentication is handled via `lib/authenticate.js`, with route protection possibly managed by `components/RouteGuard.js`.
+- State is managed centrally in `store.js`, enabling consistent data across components.
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This app is ready for deployment on Vercel or any static hosting that supports Next.js. For production, run:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Additional Resources
 
-## Deploy on Vercel
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Next.js API Routes](https://nextjs.org/docs/api-routes/introduction)
+- [Vercel Deployment Guide](https://nextjs.org/docs/deployment)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- The app uses `next/font` for font optimization.
+- Static data like valid object IDs are stored in `public/data/validObjectIDList.json`.
+- For styling, it uses Bootstrap (`styles/bootstrap.min.css`) and custom CSS files.
